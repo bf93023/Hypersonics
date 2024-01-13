@@ -17,7 +17,7 @@ This Python script performs aircraft performance analysis based on specified par
 
 2. Run the script using a Python interpreter:
    ```
-   python aircraft_performance_analysis.py
+   python RangePrediction.py
    ```
 
 ## Input Parameters
