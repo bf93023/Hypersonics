@@ -58,4 +58,3 @@ The program generates three types of plots:
 2. **$\frac{s_C}{\text{Range}}$ vs Mach**: Shows the percentage of cruise distance with respect to total range.
 
 3. **Total Time vs Mach**: Displays the total time taken for the aircraft to complete the journey.
-```
