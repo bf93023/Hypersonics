@@ -14,6 +14,8 @@ total_ranges = [3500, 4000, 4500, 5000, 5500]  # Total range in nmi
 earth_radius = 20925641.8  # Radius of the earth in ft
 gravity_acceleration = 32.174  # Acceleration due to gravity in ft/s^2
 takeoff_acceleration = 0.3 * gravity_acceleration  # Take off Acceleration in ft/s^2
+
+# -----------Output Arrays-----------------
 climb_distance_arrays = [None] * len(lift_drag_ratios)
 percentage_cruise_arrays = [None] * len(lift_drag_ratios)
 total_time_arrays = [None] * len(lift_drag_ratios)
