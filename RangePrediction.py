@@ -8,18 +8,18 @@ os.system("cls")  # Clearing the terminal for better visibility
 
 
 # -----------INPUTS-----------------
-LoD = np.array([4, 5, 6, 7, 8])  # Lift/Drag
-MachNum = np.linspace(2, 7, 10)  # Cruse Mach number
-TotRan = [3500, 4000, 4500, 5000, 5500]  # Total range in nmi
-re = 20925641.8  # Radius of the earth in ft
-g = 32.174  # Acceleration due to gravity in ft/s^2
-a_t = 0.3 * g  # Take off Acceleration in ft/s^2
-s_L_Arrays = [None] * len(LoD)
-PerCruse_Arrays = [None] * len(LoD)
-TotalTime_Arrays = [None] * len(LoD)
-s_L_Arrays_Arrays = []
-PerCruse_Arrays_Arrays = []
-TotalTime_Arrays_Arrays = []
+lift_drag_ratios  = np.array([4, 5, 6, 7, 8])  # Lift/Drag
+cruise_mach_numbers  = np.linspace(2, 7, 10)  # Cruse Mach number
+total_ranges  = [3500, 4000, 4500, 5000, 5500]  # Total range in nmi
+earth_radius  = 20925641.8  # Radius of the earth in ft
+gravity_acceleration  = 32.174  # Acceleration due to gravity in ft/s^2
+takeoff_acceleration  = 0.3 * gravity_acceleration  # Take off Acceleration in ft/s^2
+climb_distance_arrays  = [None] * len(lift_drag_ratios)
+percentage_cruise_arrays  = [None] * len(lift_drag_ratios)
+total_time_arrays  = [None] * len(lift_drag_ratios)
+climb_distance_arrays_arrays  = []
+percentage_cruise_arrays_arrays  = []
+total_time_arrays_arrays  = []
 
 
 # ----------------------TAKE OFF/THROTTLE UP---------------------------------------
@@ -86,15 +86,15 @@ def run_calculations(LoD, MachNum, TotRan, re, g, a_t):
                 TotalTime_Vals[j] = t_total
                 PerCruse = s_C / TotRan_i * 100
                 PerCruse_Vals[j] = PerCruse
-            s_L_Arrays[i] = s_L_Vals
-            PerCruse_Arrays[i] = PerCruse_Vals
-            TotalTime_Arrays[i] = TotalTime_Vals
-        s_L_Arrays_Arrays.append(s_L_Arrays.copy())
-        PerCruse_Arrays_Arrays.append(PerCruse_Arrays.copy())
-        TotalTime_Arrays_Arrays.append(TotalTime_Arrays.copy())
+            climb_distance_arrays[i] = s_L_Vals
+            percentage_cruise_arrays[i] = PerCruse_Vals
+            total_time_arrays[i] = TotalTime_Vals
+        climb_distance_arrays_arrays.append(climb_distance_arrays.copy())
+        percentage_cruise_arrays_arrays.append(percentage_cruise_arrays.copy())
+        total_time_arrays_arrays.append(total_time_arrays.copy())
 
 
-run_calculations(LoD, MachNum, TotRan, re, g, a_t)
+run_calculations(lift_drag_ratios, cruise_mach_numbers, total_ranges, earth_radius, gravity_acceleration, takeoff_acceleration)
 
 
 def plot_graphs(x_vals, y_vals, xlabel, ylabel, title, legend_labels):
@@ -103,31 +103,31 @@ def plot_graphs(x_vals, y_vals, xlabel, ylabel, title, legend_labels):
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
-    for i in range(len(LoD)):
-        plt.plot(x_vals, y_vals[i], label=f"L/D {LoD[i]}")
+    for i in range(len(lift_drag_ratios)):
+        plt.plot(x_vals, y_vals[i], label=f"L/D {lift_drag_ratios[i]}")
     plt.legend()
 
 
 # Generate s_L vs Mach plot
-plot_graphs(MachNum, s_L_Arrays, "Mach", "$s_L$", "$s_L$ vs Mach", legend_labels=None)
+plot_graphs(cruise_mach_numbers, climb_distance_arrays_arrays, "Mach", "$s_L$", "$s_L$ vs Mach", legend_labels=None)
 
 # Generate s_C/Range vs Mach plots
-for r in range(len(TotRan)):
-    title = f"$\\frac{{s_C}}{{\\text{{Range}}}}$ vs Mach: Range {TotRan[r]} nmi"
+for r in range(len(total_ranges)):
+    title = f"$\\frac{{s_C}}{{\\text{{Range}}}}$ vs Mach: Range {total_ranges[r]} nmi"
     plot_graphs(
-        MachNum, PerCruse_Arrays_Arrays[r], "Mach", title, title, legend_labels=LoD
+        cruise_mach_numbers, percentage_cruise_arrays_arrays[r], "Mach", title, title, legend_labels=lift_drag_ratios
     )
 
 
 # Generate Total time vs Mach plots
-for r in range(len(TotRan)):
+for r in range(len(total_ranges)):
     plot_graphs(
-        MachNum,
-        TotalTime_Arrays_Arrays[r],
+        cruise_mach_numbers,
+        total_time_arrays_arrays[r],
         "Mach",
         "Total Time [min]",
-        f"Total Time [min] vs Mach: Range {TotRan[r]}",
-        legend_labels=LoD,
+        f"Total Time [min] vs Mach: Range {total_ranges[r]}",
+        legend_labels=lift_drag_ratios,
     )
 
 plt.show()
