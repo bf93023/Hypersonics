@@ -1,6 +1,6 @@
 # Aircraft Performance Analysis Readme
 
-This Python script is designed to perform an analysis of aircraft performance based on various input parameters. The analysis includes calculations for take-off, climb, cruise, landing, and glide phases. The results are then visualized through plots showcasing climb distance, percentage of cruise distance, and total time across different lift/drag ratios and cruise Mach numbers.
+This Python script is designed to perform an analysis of aircraft performance based on various input parameters. The analysis includes calculations for take-off and climb, cruise, then landing and glide phases. The results are then visualized through plots showcasing climb distance, percentage of cruise distance, and total time across different lift/drag ratios and cruise Mach numbers.
 
 ## Requirements
 
