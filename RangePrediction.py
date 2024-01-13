@@ -72,7 +72,7 @@ def run_calculations(LoD, MachNum, TotRan, re, g, a_t):
         for i in range(len(LoD)):
             LoD_i = LoD[i]
             # print("\n\nL/D:", LoD_i)
-            PerCruse_Vals = np.zeros((len(MachNum)))
+            PerCruise_Vals = np.zeros((len(MachNum)))
             s_L_Vals = np.zeros(len(MachNum))
             TotalTime_Vals = np.zeros((len(MachNum)))
             for j in range(len(MachNum)):
@@ -86,10 +86,10 @@ def run_calculations(LoD, MachNum, TotRan, re, g, a_t):
                 t_C, s_C = cruise(TotRan_i, s_T, s_L, V_c)
                 t_total = (t_T + t_L + t_C) / 60
                 TotalTime_Vals[j] = t_total
-                PerCruse = s_C / TotRan_i * 100
-                PerCruse_Vals[j] = PerCruse
+                PerCruise = s_C / TotRan_i * 100
+                PerCruise_Vals[j] = PerCruise
             climb_distance_arrays[i] = s_L_Vals
-            percentage_cruise_arrays[i] = PerCruse_Vals
+            percentage_cruise_arrays[i] = PerCruise_Vals
             total_time_arrays[i] = TotalTime_Vals
         climb_distance_arrays_arrays.append(climb_distance_arrays.copy())
         percentage_cruise_arrays_arrays.append(percentage_cruise_arrays.copy())
