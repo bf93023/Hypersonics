@@ -26,7 +26,7 @@ total_time_arrays_arrays = []
 
 # ----------------------TAKE OFF/THROTTLE UP---------------------------------------
 def take_off_throttle_up(V_c, a_t):
-    """Use kinimatic equations to determine time and distance to cruse velocity"""
+    """Use kinematic equations to determine time and distance to cruise velocity"""
 
     t_T = V_c / a_t  # time to cruse in seconds
     s_T = 0.5 * a_t * t_T**2  # cruise distance covered in ft
@@ -36,7 +36,7 @@ def take_off_throttle_up(V_c, a_t):
 
 # ----------------------Landing and Glide------------------------------------------
 def landing_glide(V_c, g, LoD, re):
-    """Using equations on slide 3 provided by Dr. Bockut to determine time and distance to land"""
+    """Using equations on slide 3 provided by Dr. Bowcutt to determine time and distance to land"""
     A = g / LoD
     B = g * re
     C = (1 + V_c / np.sqrt(B)) / (1 - V_c / np.sqrt(B))
@@ -56,7 +56,7 @@ def landing_glide(V_c, g, LoD, re):
 
 # ----------------------CRUSE----------------------------------------------------
 def cruise(TotRan, s_T, s_L, V_c):
-    """calculate the distance and time at cruse"""
+    """Calculate the distance and time at cruise"""
 
     s_C = TotRan - s_T - s_L
     t_C = s_C / V_c
